@@ -1,0 +1,5 @@
+I release this project to the world under the GPL 3 license as stated by the FSF.
+
+https://www.gnu.org/licenses/gpl-3.0.en.html
+
+

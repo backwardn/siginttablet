@@ -1,0 +1,10 @@
+To slice, I used Slic3r.
+
+I'm using a .4mm nozzle, with .2mm layer height for all layers
+I set infill to 40%, honeycomb.
+I set Horizontal shells (bottom AND top) to 0. This expresses the infill to the seethrough effect I have
+
+Once you regenerate the slice, view the layers tab on the bottom of the 3d interface. 
+You want to check and verify the layers are doing what you want. 
+
+Once you're happy with how the lid effect is expressed, generate the GCode and send to printer

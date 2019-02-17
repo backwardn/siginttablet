@@ -1,0 +1,69 @@
+This is a list of materials you will need to complete this tablet.
+
+Please be aware, that since the product links are to a variety of auction sites, these prices **WILL** change. I also considered a few things as 0 cost. For example, USB cables are ubiquitious. We cut a few up. 
+
+I also have a large format 3d printer. You probably don't. I didn't include cost for printables, or nuts and bolts. I buy in quantity from Fastenal or McMaster Carr. 
+
+Total cost tally as of 17 Feb 2019: $157.50
+
+	-- 3d Printables --
+
+0. The printables. I have my own printer. You need a full printable size of 200mm x 200mm to print these parts
+
+
+	-- Electronics --
+
+1. Raspberry Pi 3 B+ $36.00
+https://www.ebay.com/itm/Raspberry-PI-3-Model-B-Quad-Core-64-Bit-1GB-WIFI-Motherboard-PC-Computer-NEW/232120229741
+
+2. MicroSD card (salvaged from other projects) $0
+
+3. PWRbar 10AH battery (purchased from Office Depot on sale) $5
+https://www.officedepot.com/a/products/757106/PWR-Bar-10000-mAh-Micro-USB/
+
+4. LCD Touchscreen $58.00
+https://www.ebay.com/itm/7-Inch-1024-600-Capacitive-Touch-Screen-HDMI-TFT-LCD-Display-for-Raspberry-Pi/263427485642
+
+5. RTL-SDR $9.50
+https://www.aliexpress.com/item/Useful-Usb2-0-DAB-FM-DVB-T-RTL-SDR-Dongle-vara-RTL2832-R820T-SDR-Digital-TV/32812258737.html
+
+6. IS11-BT05 Bluetooth keyboard $20
+
+7. Random USB wifi that Kali linux liked, junked find 0$
+
+
+	-- Cables --
+
+8. MCX to SMA adapter $4
+https://www.ebay.com/itm/6-SMA-Female-Nut-Bulkhead-to-MCX-Male-Straight-RG316-cable-pigtail-US-Stock/111782431584
+
+9. SMA female to jumper lead $2
+https://www.ebay.com/itm/SMA-Female-Jack-W-Nut-Bulkhead-Pigtail-RF-Jumper-Cable-1-13mm-f-PCB-Board-10cm/253447841441
+
+10. 50cm HDMI ribbon $8
+https://www.ebay.com/itm/50cm-FPV-Dual-90-Degree-Up-Angled-HDMI-Type-A-Male-to-Male-HDTV-FPC-Flat-Cable/163407521002
+
+11. Pile of "donor" micro USB cables $0
+
+12. SPST Switch. 11mm diameter. Radio Shack deal. $1 
+
+
+	-- Antennas --
+
+13. Really long wifi antenna found with above usb device 0$
+
+14. 2 Antennas 50MHz-1200MHz $20
+Ebay store closed... :/ I need a reliable source. This will likely balloon the budget.
+
+
+	-- Screws/Nuts --
+
+15. M3X45 cap screws (X4)
+
+16. M3 nut (x4)
+
+17. M3X16 cap screws (X6)
+
+18. M3 Heat set inserts, 4.3mm tall (X4)
+https://www.mcmaster.com/94459A130
+NOTE: If you redesign the back cover for M3 nuts, you can use them instead. It won't look as finished, but will certainly work.
