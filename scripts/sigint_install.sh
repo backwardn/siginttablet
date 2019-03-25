@@ -9,20 +9,26 @@ sudo apt-get update
 sudo apt-get upgrade
 
 # Install requisite libraries and repo software
-sudo apt-get install -y build-essential cmake libpcap-dev libpcap0.8 libusb-1.0-0 libnetfilter-queue-dev libnetfilter-queue1 
-sudo apt-get install -y gqrx-sdr gnuradio* librtlsdr-dev soapysdr-module-rtlsdr 
-sudo apt-get install -y gr-analog gr-blocks gr-channel gr-filter 
-sudo apt-get install -y python3-numpy python3-psutil python3-zmq python3-pyqt5 g++ libpython3-dev python3-pip cython3 qt5-default 
+sudo apt-get install -y build-essential cmake libpcap-dev libpcap0.8 libusb-1.0-0 libnetfilter-queue-dev libnetfilter-queue1 default-jdk apt-file gcc-multilib libudh-dev libboost-all-dev
+sudo apt-get install -y gqrx-sdr gnuradio* librtlsdr-dev soapysdr-module-rtlsdr
+sudo apt-get install -y gr-analog gr-blocks gr-channel gr-filter
+sudo apt-get install -y python3-numpy python3-psutil python3-zmq python3-pyqt5 g++ libpython3-dev python3-pip cython3 qt5-default
 sudo apt-get install -y libfftw3-dev pkg-config libliquid-dev sdcc binutils python python-pip
 sudo apt-get install -y libqwtplot3d-qt4-0v5 libqwtplot3d-qt4-dev libqwt-dev libqwt-headers
-sudo pip install -U tensorflow pip platformio
+sudo pip install -U tensorflow
+sudo pip install -U pip
+sudo pip install -U platformio
 sudo pip install -U -I pyusb
 
+# Update file package ownership
+sudo apt-file update
 
 # Set up sourcecode location for most applications
 mkdir ~/source
 cd ~/source
 
+# Set up JAVA_HOME
+echo "export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))" >> ~/.bash_profile
 
 # Set up GOLANG and variables
 wget https://dl.google.com/go/go1.12.1.linux-armv6l.tar.gz
@@ -86,3 +92,10 @@ go get github.com/bettercap/bettercap
 cd $GOPATH/src/github.com/bettercap/bettercap
 make build 
 sudo make install
+cd ~/source
+
+# Install TempestSDR
+git clone https://github.com/hennichodernich/TempestSDR.git
+cd TempestSDR/JavaGUI
+sed -i 's/PLUGINS += TSDRPlugin_HackRF/#PLUGINS += TSDRPlugin_HackRF/g' makefile
+make all
