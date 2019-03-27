@@ -12,10 +12,10 @@ sudo apt-get upgrade -qq
 
 # Install requisite libraries and repo software
 echo "Installing SigInt repository software and libraries"
-sudo apt-get install -qq -y build-essential cmake libpcap-dev libpcap0.8 libusb-1.0-0 libnetfilter-queue-dev libnetfilter-queue1 default-jdk apt-file gcc-multilib libudh-dev libboost-all-dev libsndfile1-dev imagemagick libfftw3-dev buffer vim libatlas-base-dev wireshark wireshark-qt
-sudo apt-get install -qq -y gqrx-sdr gnuradio* librtlsdr-dev soapysdr-module-rtlsdr gr-air-modes gr-radar gr-rds gr-iio gr-hpsdr
+sudo apt-get install -qq -y build-essential cmake libpcap-dev libpcap0.8 libusb-1.0-0 libnetfilter-queue-dev libnetfilter-queue1 default-jdk apt-file gcc-multilib libudh-dev libboost-all-dev libsndfile1-dev imagemagick libfftw3-dev buffer vim libatlas-base-dev wireshark wireshark-qt swig
+sudo apt-get install -qq -y gqrx-sdr gnuradio* librtlsdr-dev soapysdr-module-rtlsdr gr-air-modes gr-radar gr-rds gr-iio gr-hpsdr gr-osmosdr
 sudo apt-get install -qq -y python3-numpy python3-psutil python3-zmq python3-pyqt5 g++ libpython3-dev python3-pip cython3 qt5-default
-sudo apt-get install -qq -y libfftw3-dev pkg-config libliquid-dev sdcc binutils python python-pip
+sudo apt-get install -qq -y libfftw3-dev pkg-config libliquid-dev sdcc binutils python python-pip doxygen python-numpy python-scipy python-scapy
 sudo apt-get install -qq -y libqwtplot3d-qt4-0v5 libqwtplot3d-qt4-dev libqwt-dev libqwt-headers
 sudo pip3 install -U tensorflow
 sudo pip install -U pip
@@ -30,6 +30,15 @@ echo "Setting up ~/source as base directory"
 if [ ! -d ~/source ]; then
     mkdir ~/source
 fi
+
+if [ ! -d ~/.grc_gnuradio/ ]; then
+    mkdir ~/.grc_gnuradio/
+fi
+
+if [ ! -d ~/.gnuradio/ ]; then
+    mkdir ~/.gnuradio/
+fi
+
 cd ~/source
 
 # Set up JAVA_HOME
@@ -138,6 +147,52 @@ mkdir build
 cd build
 cmake ..
 make
+sudo make install
+cd ~/source
+
+
+# GSM Gnuradio module
+echo "Installing GSM Gnuradio modules."
+if [ ! -d ~/source/gr-gsm ]; then
+    git clone https://git.osmocom.org/gr-gsm
+    cd gr-gsm
+else
+    cd gr-gsm
+    git pull
+fi
+mkdir build
+cd build
+cmake ..
+make -j2
+sudo make install
+sudo ldconfig
+cd ~/source
+
+
+# GSM IMSI Catcher
+echo "Installing IMSI Catcher."
+if [ ! -d ~/source/IMSI-catcher ]; then
+    git clone https://github.com/Oros42/IMSI-catcher.git
+    cd IMSI-catcher
+else
+    cd IMSI-catcher
+    git pull
+fi
+
+
+# LTE Gnuradio module
+echo "Installing LTE Gnuradio modules."
+if [ ! -d ~/source/gr-lte ]; then
+    git clone https://github.com/kit-cel/gr-lte.git
+    cd gr-lte
+else
+    cd gr-lte
+    git pull
+fi
+mkdir build
+cd build
+cmake ..
+make -j2
 sudo make install
 cd ~/source
 
