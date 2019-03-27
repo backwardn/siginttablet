@@ -101,9 +101,18 @@ else
 fi
 
 # Radio protocol analyzers
-# git clone https://github.com/jopohl/urh.git
+# git clone 
 echo "Installing Universal Radio Hacker"
-sudo pip3 install urh
+# sudo pip3 install urh DOESNT WORK ON RPI :(
+if [ ! -d ~/source/urh ]; then
+    git clone https://github.com/jopohl/urh.git
+    cd urh
+else
+    cd urh
+    git pull
+fi
+cd urh
+sudo python3 setup.py install
 
 # Inspectrum 
 echo "installing Inspectrum protocol analoyzer"
