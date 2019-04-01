@@ -2,7 +2,7 @@
 
 # Remove unneeded software from device
 echo "Removing default RasPi packages that don't apply to SigInt"
-sudo apt-get remove -qq bluej geany greenfoot scratch scratch2 python-sense-emu python3-sense-emu sonic-pi python3-thonny python3-thonny-pi smartsim libreoffice* claws-mail python-games 
+sudo apt-get remove -qq wolfram-engine realvnc-vnc-viewer minecraft-pi nodered bluej geany greenfoot scratch scratch2 python-sense-emu python3-sense-emu sonic-pi python3-thonny python3-thonny-pi smartsim libreoffice* claws-mail python-games 
 sudo apt-get autoremove -qq -y
 
 # Now we update the base system
@@ -12,7 +12,7 @@ sudo apt-get upgrade -qq
 
 # Install requisite libraries and repo software
 echo "Installing SigInt repository software and libraries"
-sudo apt-get install -qq -y build-essential cmake libpcap-dev libpcap0.8 libusb-1.0-0 libnetfilter-queue-dev libnetfilter-queue1 default-jdk apt-file libudh-dev libboost-all-dev libsndfile1-dev imagemagick libfftw3-dev buffer vim libatlas-base-dev wireshark wireshark-qt swig
+sudo apt-get install -qq -y build-essential cmake libpcap-dev libpcap0.8 libusb-1.0-0 libnetfilter-queue-dev libnetfilter-queue1 default-jdk apt-file libuhd-dev libboost-all-dev libsndfile1-dev imagemagick libfftw3-dev buffer vim libatlas-base-dev wireshark wireshark-qt swig
 sudo apt-get install -qq -y gqrx-sdr gnuradio* librtlsdr-dev soapysdr-module-rtlsdr gr-air-modes gr-radar gr-rds gr-iio gr-hpsdr gr-osmosdr
 sudo apt-get install -qq -y python3-numpy python3-psutil python3-zmq python3-pyqt5 g++ libpython3-dev python3-pip cython3 qt5-default
 sudo apt-get install -qq -y libfftw3-dev pkg-config libliquid-dev sdcc binutils python python-pip doxygen python-numpy python-scipy python-scapy pyqt5-dev python-pyqt5
@@ -242,3 +242,13 @@ else
 fi
 sed -i 's/PLUGINS += TSDRPlugin_HackRF/#PLUGINS += TSDRPlugin_HackRF/g' makefile
 make all
+
+
+
+
+
+# Install and configure menu items
+sudo cp ./start_menu_items/*.desktop /usr/share/applications/
+
+# Refresh the GUI to see the new menu items
+lxpanelctl restart

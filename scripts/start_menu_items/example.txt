@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=$NAME
+Comment=$COMMENT
+Icon=/usr/share/pixmaps/pathtoimage.png
+Exec=/path/to/exec
+Terminal=false
+Categories=Development;
