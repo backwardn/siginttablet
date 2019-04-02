@@ -13,8 +13,8 @@ sudo apt-get upgrade -qq
 # Install requisite libraries and repo software
 echo "Installing SigInt repository software and libraries"
 sudo apt-get install -qq -y build-essential cmake libpcap-dev libpcap0.8 libusb-1.0-0 libnetfilter-queue-dev libnetfilter-queue1 default-jdk apt-file libuhd-dev libboost-all-dev libsndfile1-dev imagemagick libfftw3-dev buffer vim libatlas-base-dev wireshark wireshark-qt swig
-sudo apt-get install -qq -y gqrx-sdr gnuradio* librtlsdr-dev soapysdr-module-rtlsdr gr-air-modes gr-radar gr-rds gr-iio gr-hpsdr gr-osmosdr
-sudo apt-get install -qq -y python3-numpy python3-psutil python3-zmq python3-pyqt5 g++ libpython3-dev python3-pip cython3 qt5-default
+sudo apt-get install -qq -y gqrx-sdr gnuradio* gr-air-modes gr-radar gr-rds gr-iio gr-hpsdr gr-osmosdr
+sudo apt-get install -qq -y python3-numpy python3-psutil python3-zmq python3-pyqt5 g++ libpython3-dev python3-pip cython3 qt5-default autoconf automake libtool libnl-3-dev libnl-genl-3-dev libssl-dev ethtool shtool rfkill zlib1g-dev libpcap-dev libsqlite3-dev libpcre3-dev libhwloc-dev libcmocka-dev hostapd wpasupplicant tcpdump screen iw
 sudo apt-get install -qq -y libfftw3-dev pkg-config libliquid-dev sdcc binutils python python-pip doxygen python-numpy python-scipy python-scapy pyqt5-dev python-pyqt5
 sudo apt-get install -qq -y libqwtplot3d-qt4-0v5 libqwtplot3d-qt4-dev libqwt-dev libqwt-headers
 sudo pip3 install -U tensorflow
@@ -101,7 +101,6 @@ else
 fi
 
 # Radio protocol analyzers
-# git clone 
 echo "Installing Universal Radio Hacker"
 # sudo pip3 install urh DOESNT WORK ON RPI :(
 if [ ! -d ~/source/urh ]; then
@@ -113,6 +112,39 @@ else
 fi
 cd urh
 sudo python3 setup.py install
+
+
+# Aircrack-ng
+echo "installing Aircrack-NG"
+if [ ! -d ~/source/aircrack-ng ]; then
+    git clone https://github.com/aircrack-ng/aircrack-ng.git
+    cd aircrack-ng
+else
+    cd aircrack-ng
+    git pull
+fi
+autoreconf -i
+./configure
+make
+make check && sudo make integration && sudo make install
+cd ~/source
+
+# SoapySDR
+echo "installing SoapySDR"
+if [ ! -d ~/source/SoapySDR ]; then
+    git clone https://github.com/pothosware/SoapySDR.git
+    cd SoapySDR
+else
+    cd SoapySDR
+    git pull
+fi
+mkdir build
+cd build
+cmake ..
+make -j4
+sudo make install
+sudo ldconfig 
+cd ~/source
 
 # Inspectrum 
 echo "installing Inspectrum protocol analoyzer"
@@ -221,6 +253,69 @@ cmake ..
 make -j4
 sudo make install
 cd ~/source
+
+# gr-air-modes for gnuradio
+echo "Installing gr-air-modes in gnu radio."
+if [ ! -d ~/source/gr-air-modes ]; then
+    git clone https://github.com/bistromath/gr-air-modes.git
+    cd gr-air-modes
+else
+    cd gr-air-modes
+    git pull
+fi
+mkdir build
+cd build
+cmake ..
+make -j4
+sudo make install
+cd ~/source
+
+# multimon-ng plugins
+echo "Installing multimon-ng."
+if [ ! -d ~/source/multimon-ng ]; then
+    git clone https://github.com/EliasOenal/multimon-ng.git
+    cd multimon-ng
+else
+    cd multimon-ng
+    git pull
+fi
+mkdir build
+cd build
+cmake ..
+make -j4
+sudo make install
+cd ~/source
+
+# rtl_433 telemetry
+echo "Installing rtl_433"
+if [ ! -d ~/source/rtl_433 ]; then
+    git clone https://github.com/merbanan/rtl_433.git
+    cd rtl_433
+else
+    cd rtl_433
+    git pull
+fi
+mkdir build
+cd build
+cmake ..
+make -j4
+sudo make install
+cd ~/source
+
+## ShinySDR - DONT USE, uses too much resources for RPi 3b+
+#echo "Installing Signal idenitifier gr-inspector in gnu radio."
+#if [ ! -d ~/source/shinysdr ]; then
+#    git clone https://github.com/kpreid/shinysdr.git
+#    cd shinysdr
+#    ./fetch-js-deps.sh
+#else
+#    cd shinysdr
+#    git pull
+#    ./fetch-js-deps.sh
+#fi
+#python setup.py build
+#sudo python setup.py install
+#cd ~/source
 
 # BTLE and wifi reconnsaisance and hacking
 echo "Installing Bettercap for Wifi/BT/BTLE"
