@@ -1,0 +1,17 @@
+1.35-9.5GHz UWB Ultra Wideband Logarithmic Period Antenna
+power capacity: 15W max
+
+bottom base = 81mm
+top base = 20mm
+tall = 100mm
+Vertical before slope: 13mm
+Tube dia = 2.5mm
+SMA solder joint = 3.5mm
+Thickness PCB = 1.5mm
+SMA (to solder joinit) tube extends out of PCB = 16mm
+
+
+
+Some references and estimations of the emmitted pattern:
+http://www.antenna-theory.com/antennas/wideband/log-periodic.php
+http://www.w8io.com/LPCAD2.htm
