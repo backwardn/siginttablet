@@ -34,42 +34,44 @@ https://www.aliexpress.com/item/Useful-Usb2-0-DAB-FM-DVB-T-RTL-SDR-Dongle-vara-R
 8. (OPTIONAL) CrazyRadio , allows easy keyboard mouse sniffing/injection for wide variety of hardware $8
 https://www.ebay.com/itm/Crazyradio-2-4Ghz-nRF24LU1-USB-radio-dongle-with-antenna-for-Crzayflie-10DOF/231423427319
 
+9. (OPTIONAL) (WARNING) GPS chip , bought on AliExpress for $10 but cannot find anywhere. Dealer no longer is there.
+
 
 	-- Cables --
 
-9. MCX to SMA adapter $4
+10. MCX to SMA adapter $4
 https://www.ebay.com/itm/6-SMA-Female-Nut-Bulkhead-to-MCX-Male-Straight-RG316-cable-pigtail-US-Stock/111782431584
 
-10. SMA female to jumper lead $2
+11. SMA female to jumper lead $2
 https://www.ebay.com/itm/SMA-Female-Jack-W-Nut-Bulkhead-Pigtail-RF-Jumper-Cable-1-13mm-f-PCB-Board-10cm/253447841441
 
-11. 50cm HDMI ribbon $8
+12. 50cm HDMI ribbon $8
 https://www.ebay.com/itm/50cm-FPV-Dual-90-Degree-Up-Angled-HDMI-Type-A-Male-to-Male-HDTV-FPC-Flat-Cable/163407521002
 
-12. Pile of "donor" micro USB cables $0
+13. Pile of "donor" micro USB cables $0
 
-13. SPST Switch. 11mm diameter. Radio Shack deal. $1 
+14. SPST Switch. 11mm diameter. Radio Shack deal. $1 
 
 
 	-- Antennas --
 
-14. Really long wifi antenna found with above usb device 0$
+15. Really long wifi antenna found with above usb device 0$
 
-15. 2 Antennas 50MHz-1200MHz $20
+16. 2 Antennas 50MHz-1200MHz $20
 Ebay store closed... :/ I need a reliable source. This will likely balloon the budget.
 
-16. (OPTIONAL) Log Peroidic Antenna $9.20
+17. (OPTIONAL) Log Peroidic Antenna $9.20
 https://www.ebay.com/itm/15W-5-6dB-1-35-9-5GHz-UWB-Ultra-Wideband-Logarithmic-Period-Antenna/292695546650
 
 
 	-- Screws/Nuts --
 
-17. M3X45 cap screws (X4)
+18. M3X45 cap screws (X4)
 
-18. M3 nut (x4)
+19. M3 nut (x4)
 
-19. M3X16 cap screws (X6)
+20. M3X16 cap screws (X6)
 
-20. M3 Heat set inserts, 4.3mm tall (X4)
+21. M3 Heat set inserts, 4.3mm tall (X4)
 https://www.mcmaster.com/94459A130
 NOTE: If you redesign the back cover for M3 nuts, you can use them instead. It won't look as finished, but will certainly work.
