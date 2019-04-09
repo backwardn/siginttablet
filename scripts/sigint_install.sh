@@ -53,7 +53,7 @@ fi
 
 # Set up GOLANG and variables
 echo "Downloading, installing, and setting up env for GOLANG"
-if wget https://dl.google.com/go/go1.12.1.linux-armv6l.tar.gz; then
+if wget -c https://dl.google.com/go/go1.12.1.linux-armv6l.tar.gz; then
     sudo tar -C /usr/local -xzf go1.12.1.linux-armv6l.tar.gz
 
     if [ ! -d ~/go ]; then
@@ -91,6 +91,7 @@ cd ~/source
 
 
 # Spy mic detecter
+# NEEDS: rtl-sdr
 echo "Installing Salamandra spy mic detector"
 if [ ! -d ~/source/Salamandra ]; then
     git clone https://github.com/eldraco/Salamandra.git
@@ -100,7 +101,9 @@ else
     cd ~/source
 fi
 
+
 # Radio protocol analyzers
+# NEEDS: python3-numpy python3-psutil python3-zmq python3-pyqt5 g++ libpython3-dev python3-pip cython3
 echo "Installing Universal Radio Hacker"
 # sudo pip3 install urh DOESNT WORK ON RPI :(
 if [ ! -d ~/source/urh ]; then
@@ -114,22 +117,8 @@ cd urh
 sudo python3 setup.py install
 
 
-# Aircrack-ng
-echo "installing Aircrack-NG"
-if [ ! -d ~/source/aircrack-ng ]; then
-    git clone https://github.com/aircrack-ng/aircrack-ng.git
-    cd aircrack-ng
-else
-    cd aircrack-ng
-    git pull
-fi
-autoreconf -i
-./configure
-make
-make check && sudo make integration && sudo make install
-cd ~/source
-
 # SoapySDR
+# NEEDS: cmake g++ libpython-dev python-numpy swig
 echo "installing SoapySDR"
 if [ ! -d ~/source/SoapySDR ]; then
     git clone https://github.com/pothosware/SoapySDR.git
@@ -146,7 +135,9 @@ sudo make install
 sudo ldconfig 
 cd ~/source
 
+
 # Inspectrum 
+# NEEDS: cmake >= 2.8.11 , fftw 3.x , liquid-dsp >= v1.3.0 , pkg-config , qt5
 echo "installing Inspectrum protocol analoyzer"
 if [ ! -d ~/source/inspectrum ]; then
     git clone https://github.com/miek/inspectrum.git
@@ -163,6 +154,9 @@ cd ~/source
 
 
 # Nordic chipset hacker
+# NEEDS: sdcc binutils python python-pip
+# NEEDS: sudo pip install -U pip platformio
+# NEEDS: sudo pip install -U -I pyusb
 echo "Installing Mousejack firmware and tools"
 if [ ! -d ~/source/mousejack ]; then
     git clone https://github.com/BastilleResearch/mousejack.git
@@ -175,7 +169,9 @@ git submodule init
 git submodule update
 cd ~/source
 
+
 # Nordic Gnuradio module
+# NEEDS:
 echo "Installing Mousejack Gnuradio modules."
 if [ ! -d ~/source/gr-nordic ]; then
     git clone https://github.com/BastilleResearch/gr-nordic.git
@@ -193,6 +189,10 @@ cd ~/source
 
 
 # GSM Gnuradio module
+# NEEDS: GNU Radio with header files
+# NEEDS: development tools: git, cmake, autoconf, libtool, pkg-config, g++, gcc, make, libc6 with headers, libcppunit with headers, swig, doxygen, liblog4cpp with headers, python-scipy
+# NEEDS: gr-osmosdr
+# NEEDS: libosmocore with header files
 echo "Installing GSM Gnuradio modules."
 if [ ! -d ~/source/gr-gsm ]; then
     git clone https://git.osmocom.org/gr-gsm
@@ -211,6 +211,7 @@ cd ~/source
 
 
 # GSM IMSI Catcher
+# NEEDS:
 echo "Installing IMSI Catcher."
 if [ ! -d ~/source/IMSI-catcher ]; then
     git clone https://github.com/Oros42/IMSI-catcher.git
@@ -222,6 +223,7 @@ fi
 
 
 # LTE Gnuradio module
+# NEEDS: ?????????????
 echo "Installing LTE Gnuradio modules."
 if [ ! -d ~/source/gr-lte ]; then
     git clone https://github.com/kit-cel/gr-lte.git
@@ -239,6 +241,12 @@ cd ~/source
 
 
 # SigInt toolbox for gnuradio
+# NEEDS: GNU Radio 3.7.9.3
+# NEEDS: gr-analog, gr-blocks, gr-channel, gr-filter
+# NEEDS: QT4
+# NEEDS: QWT 6.1.0
+# NEEDS: QwtPlot3D
+# NEEDS: TensorFlow 0.12
 echo "Installing Signal idenitifier gr-inspector in gnu radio."
 if [ ! -d ~/source/gr-inspector ]; then
     git clone https://github.com/gnuradio/gr-inspector.git
@@ -338,7 +346,16 @@ fi
 sed -i 's/PLUGINS += TSDRPlugin_HackRF/#PLUGINS += TSDRPlugin_HackRF/g' makefile
 make all
 
-
+# Install SDRtrunk
+echo "Installing SDRTrunk"
+if [ ! -d ~/source/sdrtrunk ]; then
+    mkdir sdrtrunk
+    cd sdrtrunk
+else
+    cd sdrtrunk
+fi
+wget -c https://github.com/DSheirer/sdrtrunk/releases/download/v0.4.0-alpha.9/sdr-trunk-0.4.0-alpha.9-linux-x64.zip
+unzip sdr-trunk-0.4.0-alpha.9-linux-x64.zip
 
 
 

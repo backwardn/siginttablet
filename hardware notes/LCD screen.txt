@@ -1,0 +1,9 @@
+If you use the mentioned LCD screen, you will need to modify the Raspbian config.txt prior to booting.
+
+Load the MicroSD card on your computer and edit "/boot/config.txt" and *ADD* to the bottom of the file:
+
+max_usb_current=1
+hdmi_group=2
+hdmi_mode=1
+hdmi_mode=87
+hdmi_cvt 1024 600 60 6 0 0 0 
