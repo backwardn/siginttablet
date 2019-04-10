@@ -5,6 +5,10 @@ echo "Removing default RasPi packages that don't apply to SigInt"
 sudo apt-get remove -qq wolfram-engine realvnc-vnc-viewer minecraft-pi nodered bluej geany greenfoot scratch scratch2 python-sense-emu python3-sense-emu sonic-pi python3-thonny python3-thonny-pi smartsim libreoffice* claws-mail python-games 
 sudo apt-get autoremove -qq -y
 
+# Enable and start SSH
+sudo systemctl enable ssh
+sudo systemctl start ssh
+
 # Now we update the base system
 echo "Updating/Upgrading base system"
 sudo apt-get update -qq
@@ -12,7 +16,7 @@ sudo apt-get upgrade -qq
 
 # Install requisite libraries and repo software
 echo "Installing SigInt repository software and libraries"
-sudo apt-get install -qq -y build-essential cmake libpcap-dev libpcap0.8 libusb-1.0-0 libnetfilter-queue-dev libnetfilter-queue1 default-jdk apt-file libuhd-dev libboost-all-dev libsndfile1-dev imagemagick libfftw3-dev buffer vim libatlas-base-dev wireshark wireshark-qt swig
+sudo apt-get install -qq -y build-essential cmake libpcap-dev libpcap0.8 libusb-1.0-0 libnetfilter-queue-dev libnetfilter-queue1 default-jdk apt-file libuhd-dev libboost-all-dev libsndfile1-dev imagemagick libfftw3-dev buffer vim libatlas-base-dev wireshark wireshark-qt swig libusb-dev librtlsdr-dev
 sudo apt-get install -qq -y gqrx-sdr gnuradio* gr-air-modes gr-radar gr-rds gr-iio gr-hpsdr gr-osmosdr
 sudo apt-get install -qq -y python3-numpy python3-psutil python3-zmq python3-pyqt5 g++ libpython3-dev python3-pip cython3 qt5-default autoconf automake libtool libnl-3-dev libnl-genl-3-dev libssl-dev ethtool shtool rfkill zlib1g-dev libpcap-dev libsqlite3-dev libpcre3-dev libhwloc-dev libcmocka-dev hostapd wpasupplicant tcpdump screen iw
 sudo apt-get install -qq -y libfftw3-dev pkg-config libliquid-dev sdcc binutils python python-pip doxygen python-numpy python-scipy python-scapy pyqt5-dev python-pyqt5
@@ -113,7 +117,6 @@ else
     cd urh
     git pull
 fi
-cd urh
 sudo python3 setup.py install
 
 
@@ -138,7 +141,7 @@ cd ~/source
 
 # Inspectrum 
 # NEEDS: cmake >= 2.8.11 , fftw 3.x , liquid-dsp >= v1.3.0 , pkg-config , qt5
-echo "installing Inspectrum protocol analoyzer"
+echo "installing Inspectrum protocol analyzer"
 if [ ! -d ~/source/inspectrum ]; then
     git clone https://github.com/miek/inspectrum.git
     cd inspectrum
@@ -262,6 +265,7 @@ make -j4
 sudo make install
 cd ~/source
 
+
 # gr-air-modes for gnuradio
 echo "Installing gr-air-modes in gnu radio."
 if [ ! -d ~/source/gr-air-modes ]; then
@@ -277,6 +281,7 @@ cmake ..
 make -j4
 sudo make install
 cd ~/source
+
 
 # multimon-ng plugins
 echo "Installing multimon-ng."
@@ -294,6 +299,7 @@ make -j4
 sudo make install
 cd ~/source
 
+
 # rtl_433 telemetry
 echo "Installing rtl_433"
 if [ ! -d ~/source/rtl_433 ]; then
@@ -310,6 +316,7 @@ make -j4
 sudo make install
 cd ~/source
 
+
 ## ShinySDR - DONT USE, uses too much resources for RPi 3b+
 #echo "Installing Signal idenitifier gr-inspector in gnu radio."
 #if [ ! -d ~/source/shinysdr ]; then
@@ -325,6 +332,25 @@ cd ~/source
 #sudo python setup.py install
 #cd ~/source
 
+
+# GQRX
+# NEEDS: A pile of stuff!
+echo "Installing GQRX"
+if [ ! -d ~/source/gqrx ]; then
+    git clone https://github.com/csete/gqrx.git
+    cd gqrx
+else
+    cd gqrx
+    git pull
+fi
+mkdir build
+cd build
+cmake ..
+make -j1
+sudo make install
+cd ~/source
+
+
 # BTLE and wifi reconnsaisance and hacking
 echo "Installing Bettercap for Wifi/BT/BTLE"
 go get github.com/bettercap/bettercap
@@ -332,6 +358,7 @@ cd $GOPATH/src/github.com/bettercap/bettercap
 make build 
 sudo make install
 cd ~/source
+
 
 # Install TempestSDR
 echo "Installing TempestSDR"
@@ -346,17 +373,17 @@ fi
 sed -i 's/PLUGINS += TSDRPlugin_HackRF/#PLUGINS += TSDRPlugin_HackRF/g' makefile
 make all
 
+
 # Install SDRtrunk
 echo "Installing SDRTrunk"
 if [ ! -d ~/source/sdrtrunk ]; then
-    mkdir sdrtrunk
+    git clone https://github.com/DSheirer/sdrtrunk.git
     cd sdrtrunk
 else
     cd sdrtrunk
 fi
-wget -c https://github.com/DSheirer/sdrtrunk/releases/download/v0.4.0-alpha.9/sdr-trunk-0.4.0-alpha.9-linux-x64.zip
-unzip sdr-trunk-0.4.0-alpha.9-linux-x64.zip
-
+# Insert sketchy way the program thinks we're on x86 or x64..... :/
+cd ~/source
 
 
 # Install and configure menu items
