@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Start a transcript
+script ~/sigint_transcript_$(date +%F).txt
+
 # Remove unneeded software from device
 echo "Removing default RasPi packages that don't apply to SigInt"
 sudo apt-get remove -qq wolfram-engine realvnc-vnc-viewer minecraft-pi nodered bluej geany greenfoot scratch scratch2 python-sense-emu python3-sense-emu sonic-pi python3-thonny python3-thonny-pi smartsim libreoffice* claws-mail python-games 
@@ -391,3 +394,7 @@ sudo cp ./start_menu_items/*.desktop /usr/share/applications/
 
 # Refresh the GUI to see the new menu items
 lxpanelctl restart
+
+
+# Exits and saves the transcript command
+exit
