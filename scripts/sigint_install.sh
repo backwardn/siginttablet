@@ -4,85 +4,22 @@
 script ~/sigint_transcript_$(date +%F).txt
 
 # Remove unneeded software from device
-echo "Removing default RasPi packages that don't apply to SigInt"
-sudo apt-get remove -qq wolfram-engine realvnc-vnc-viewer minecraft-pi nodered bluej geany greenfoot scratch scratch2 python-sense-emu python3-sense-emu sonic-pi python3-thonny python3-thonny-pi smartsim libreoffice* claws-mail python-games 
-sudo apt-get autoremove -qq -y
+( exec ./01_remove_packages.sh )
 
 # Enable and start SSH
-sudo systemctl enable ssh
-sudo systemctl start ssh
+( exec ./02_enable_ssh.sh )
 
 # Now we update the base system
-echo "Updating/Upgrading base system"
-sudo apt-get update -qq
-sudo apt-get upgrade -qq
+( exec ./03_upgrade_system.sh )
 
 # Install requisite libraries and repo software
-echo "Installing SigInt repository software and libraries"
-sudo apt-get install -qq -y build-essential cmake libpcap-dev libpcap0.8 libusb-1.0-0 libnetfilter-queue-dev libnetfilter-queue1 default-jdk apt-file libuhd-dev libboost-all-dev libsndfile1-dev imagemagick libfftw3-dev buffer vim libatlas-base-dev wireshark wireshark-qt swig libusb-dev librtlsdr-dev
-sudo apt-get install -qq -y gqrx-sdr gnuradio* gr-air-modes gr-radar gr-rds gr-iio gr-hpsdr gr-osmosdr
-sudo apt-get install -qq -y python3-numpy python3-psutil python3-zmq python3-pyqt5 g++ libpython3-dev python3-pip cython3 qt5-default autoconf automake libtool libnl-3-dev libnl-genl-3-dev libssl-dev ethtool shtool rfkill zlib1g-dev libpcap-dev libsqlite3-dev libpcre3-dev libhwloc-dev libcmocka-dev hostapd wpasupplicant tcpdump screen iw
-sudo apt-get install -qq -y libfftw3-dev pkg-config libliquid-dev sdcc binutils python python-pip doxygen python-numpy python-scipy python-scapy pyqt5-dev python-pyqt5
-sudo apt-get install -qq -y libqwtplot3d-qt4-0v5 libqwtplot3d-qt4-dev libqwt-dev libqwt-headers
-sudo pip3 install -U tensorflow
-sudo pip install -U pip
-sudo pip install -U platformio
-sudo pip install -U -I pyusb
-
-# Update file package ownership
-sudo apt-file update
+( exec ./04_install_software_from_repo.sh )
 
 # Set up sourcecode location for most applications
-echo "Setting up ~/source as base directory"
-if [ ! -d ~/source ]; then
-    mkdir ~/source
-fi
-
-if [ ! -d ~/.grc_gnuradio/ ]; then
-    mkdir ~/.grc_gnuradio/
-fi
-
-if [ ! -d ~/.gnuradio/ ]; then
-    mkdir ~/.gnuradio/
-fi
-
-cd ~/source
+( exec ./05_directory_setup.sh )
 
 # Set up JAVA_HOME
-echo "Setting up Java env."
-if grep -q JAVA_HOME ~/.bash_profile; then
-    echo "JAVA_HOME already set. Ignoring."
-else
-    echo "export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))" >> ~/.bash_profile
-    echo "JAVA_HOME set to $(dirname $(dirname $(readlink -f $(which javac))))"
-fi
-
-
-# Set up GOLANG and variables
-echo "Downloading, installing, and setting up env for GOLANG"
-if wget -c https://dl.google.com/go/go1.12.1.linux-armv6l.tar.gz; then
-    sudo tar -C /usr/local -xzf go1.12.1.linux-armv6l.tar.gz
-
-    if [ ! -d ~/go ]; then
-         mkdir ~/go
-    fi
-
-    if grep -q GOPATH ~/.bash_profile; then
-        echo "GOPATH already set. Ignoring."
-    else
-        echo "export GOPATH=$HOME/go" >> ~/.bash_profile
-        echo "GOPATH set to ~/go"
-    fi
-
-    if grep -q /usr/local/go/bin ~/.bash_profile; then
-        echo "PATH already set. Ignoring."
-    else
-        echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.bash_profile
-        echo "PATH set to include /usr/local/go/bin"
-    fi
-
-    source ~/.bash_profile
-fi
+( exec ./06_set_ENV_vars.sh )
 
 # RPI transmit library
 echo "Installing RPITX transmit library"
