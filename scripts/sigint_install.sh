@@ -21,17 +21,23 @@ script ~/sigint_transcript_$(date +%F).txt
 # Set up JAVA_HOME
 ( exec ./06_set_ENV_vars.sh )
 
+# RTL_SDR library
+( exec ./07_RTLSDR_lib.sh )
+
+# Gnuradio
+( exec ./08_gnuradio.sh )
+
 # RPI transmit library
-echo "Installing RPITX transmit library"
-if [ ! -d ~/source/rpitx ]; then
-    git clone https://github.com/F5OEO/rpitx.git
-    cd rpitx
-else
-    cd rpitx
-    git pull
-fi
-./install.sh
-cd ~/source
+( exec ./09_RPITX_lib.sh )
+
+
+
+
+
+
+
+# Radio protocol analyzers
+( exec ./99_proto_analyzer.sh )
 
 
 # Spy mic detecter
@@ -44,20 +50,6 @@ else
     git pull
     cd ~/source
 fi
-
-
-# Radio protocol analyzers
-# NEEDS: python3-numpy python3-psutil python3-zmq python3-pyqt5 g++ libpython3-dev python3-pip cython3
-echo "Installing Universal Radio Hacker"
-# sudo pip3 install urh DOESNT WORK ON RPI :(
-if [ ! -d ~/source/urh ]; then
-    git clone https://github.com/jopohl/urh.git
-    cd urh
-else
-    cd urh
-    git pull
-fi
-sudo python3 setup.py install
 
 
 # SoapySDR
@@ -79,21 +71,7 @@ sudo ldconfig
 cd ~/source
 
 
-# Inspectrum 
-# NEEDS: cmake >= 2.8.11 , fftw 3.x , liquid-dsp >= v1.3.0 , pkg-config , qt5
-echo "installing Inspectrum protocol analyzer"
-if [ ! -d ~/source/inspectrum ]; then
-    git clone https://github.com/miek/inspectrum.git
-    cd inspectrum
-else
-    cd inspectrum
-    git pull
-fi
-cd build
-cmake ..
-make -j4
-sudo make install
-cd ~/source
+
 
 
 # Nordic chipset hacker
