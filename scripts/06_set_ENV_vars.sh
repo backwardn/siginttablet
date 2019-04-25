@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd ~/source
 # Set up JAVA_HOME
 echo "Setting up Java env."
 if grep -q JAVA_HOME ~/.bash_profile; then
