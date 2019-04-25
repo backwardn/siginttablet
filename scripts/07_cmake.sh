@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd ~/source
 echo "Installing CMake"
 if [ ! -d ~/source/CMake ]; then
     git clone https://github.com/Kitware/CMake.git

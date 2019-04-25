@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd ~/source
 echo "Installing RTL_SDR library"
 if [ ! -d ~/source/rtl-sdr ]; then
     git clone git://git.osmocom.org/rtl-sdr.git

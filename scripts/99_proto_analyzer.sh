@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd ~/source
 # Universal Radio Hacker
 # sudo pip3 install urh DOESNT WORK ON RPI :(
 if [ ! -d ~/source/urh ]; then

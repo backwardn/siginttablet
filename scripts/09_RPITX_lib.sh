@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd ~/source
 echo "Installing RPITX transmit library"
 if [ ! -d ~/source/rpitx ]; then
     git clone https://github.com/F5OEO/rpitx.git

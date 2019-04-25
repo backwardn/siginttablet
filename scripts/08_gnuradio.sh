@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd ~/source
 echo "Installing Gnuradio"
 if [ ! -d ~/source/gnuradio ]; then
     git clone https://github.com/gnuradio/gnuradio.git
