@@ -3,7 +3,7 @@
 cd ~/source
 echo "Installing Gnuradio"
 if [ ! -d ~/source/gnuradio ]; then
-    git clone https://github.com/gnuradio/gnuradio.git
+    git clone --recursive https://github.com/gnuradio/gnuradio.git
     cd gnuradio
 else
     cd gnuradio

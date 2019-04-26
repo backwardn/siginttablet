@@ -23,6 +23,7 @@ else
     cd inspectrum
     git pull
 fi
+mkdir build
 cd build
 cmake ..
 make -j4
