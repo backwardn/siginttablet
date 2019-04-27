@@ -27,8 +27,10 @@ cd ~/source
 
 sudo pip3 install -U tensorflow
 sudo pip3 install -U mako
-sudo pip3 install pyyaml
-sudo pip install pyyaml
+sudo pip3 install -U pyyaml
+
+sudo pip install -U mako
+sudo pip install -U pyyaml
 sudo pip install -U pip
 sudo pip install -U platformio
 sudo pip install -U -I pyusb

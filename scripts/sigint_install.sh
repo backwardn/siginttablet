@@ -3,144 +3,103 @@
 # Start a transcript
 script ~/sigint_transcript_$(date +%F).txt
 
+# Get the location of this script, wherever the user chose to git clone it to
+SIGINT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 # Remove unneeded software from device
 ( exec ./01_remove_packages.sh )
+cd $SIGINT_PATH
 
 # Enable and start SSH
 ( exec ./02_enable_ssh.sh )
+cd cd $SIGINT_PATH
 
 # Now we update the base system
 ( exec ./03_upgrade_system.sh )
+cd $SIGINT_PATH
 
 # Install requisite libraries and repo software
 ( exec ./04_install_software_from_repo.sh )
+cd $SIGINT_PATH
 
 # Set up sourcecode location for most applications
 ( exec ./05_directory_setup.sh )
+cd $SIGINT_PATH
 
 # Set up JAVA_HOME
 ( exec ./06_set_ENV_vars.sh )
+cd $SIGINT_PATH
+
+
+
+# Major libraries and software
 
 # RTL_SDR library
 ( exec ./07_RTLSDR_lib.sh )
+cd $SIGINT_PATH
 
 # Gnuradio
 ( exec ./08_gnuradio.sh )
+cd $SIGINT_PATH
 
 # RPI transmit library
 ( exec ./09_RPITX_lib.sh )
+cd $SIGINT_PATH
 
 # RTL-SDR libs
 ( exec ./10_RTLSDR_lib.sh )
+cd $SIGINT_PATH
 
 # Mousejack and gr-nordic for keyboard/mouse infiltration
 ( exec ./11_MOUSEJACK_tools.sh )
+cd $SIGINT_PATH
 
 # SoapySDR install
 ( exec ./12_SoapySDR.sh )
+cd $SIGINT_PATH
 
 # Various GR- plugins
 ( exec ./13_gr-plugins.sh )
+cd $SIGINT_PATH
 
+# GQRX, warning, this takes a *LOT* of time
+( exec ./14_GQRX.sh )
+cd $SIGINT_PATH
+
+
+# Individual programs that are not dependancies on other packages
+
+# Install dump1090, because it's awesome
+( exec ./92_dump1090.sh )
+cd $SIGINT_PATH
+
+# Sdrtrunk trunking radio receiver.... BROKEN
+#( exec ./93_sdrtrunk.sh )
+#cd $SIGINT_PATH
+
+# Install TempestSDR
+( exec ./94_TempestSDR.sh )
+cd $SIGINT_PATH
+
+# Installing Bettercap - BTLE and wifi reconnsaisance and hacking
+( exec ./95_bettercap.sh )
+cd $SIGINT_PATH
+
+# Install rtl_433 sensor library
+( exec ./96_rtl_433.sh )
+cd $SIGINT_PATH
+
+# Install MultiMon-NG
+( exec ./97_MultiMon-NG.sh )
+cd $SIGINT_PATH
 
 # Spy mic detecter, requires RTL-SDR
 ( exec ./98_salamandra.sh )
+cd $SIGINT_PATH
 
 # Radio protocol analyzers
 ( exec ./99_proto_analyzer.sh )
-
-
-
-
-
-
-
-
-# multimon-ng plugins
-echo "Installing multimon-ng."
-if [ ! -d ~/source/multimon-ng ]; then
-    git clone https://github.com/EliasOenal/multimon-ng.git
-    cd multimon-ng
-else
-    cd multimon-ng
-    git pull
-fi
-mkdir build
-cd build
-cmake ..
-make -j4
-sudo make install
-cd ~/source
-
-
-# rtl_433 telemetry
-echo "Installing rtl_433"
-if [ ! -d ~/source/rtl_433 ]; then
-    git clone https://github.com/merbanan/rtl_433.git
-    cd rtl_433
-else
-    cd rtl_433
-    git pull
-fi
-mkdir build
-cd build
-cmake ..
-make -j4
-sudo make install
-cd ~/source
-
-
-# GQRX
-# NEEDS: A pile of stuff!
-echo "Installing GQRX"
-if [ ! -d ~/source/gqrx ]; then
-    git clone https://github.com/csete/gqrx.git
-    cd gqrx
-else
-    cd gqrx
-    git pull
-fi
-mkdir build
-cd build
-cmake ..
-make -j1
-sudo make install
-cd ~/source
-
-
-# BTLE and wifi reconnsaisance and hacking
-echo "Installing Bettercap for Wifi/BT/BTLE"
-go get github.com/bettercap/bettercap
-cd $GOPATH/src/github.com/bettercap/bettercap
-make build 
-sudo make install
-cd ~/source
-
-
-# Install TempestSDR
-echo "Installing TempestSDR"
-if [ ! -d ~/source/TempestSDR ]; then
-    git clone https://github.com/hennichodernich/TempestSDR.git
-    cd TempestSDR/JavaGUI
-else
-    cd TempestSDR
-    git pull
-    cd JavaGUI
-fi
-sed -i 's/PLUGINS += TSDRPlugin_HackRF/#PLUGINS += TSDRPlugin_HackRF/g' makefile
-make all
-
-
-# Install SDRtrunk
-echo "Installing SDRTrunk"
-if [ ! -d ~/source/sdrtrunk ]; then
-    git clone https://github.com/DSheirer/sdrtrunk.git
-    cd sdrtrunk
-else
-    cd sdrtrunk
-fi
-# Insert sketchy way the program thinks we're on x86 or x64..... :/
-cd ~/source
+cd $SIGINT_PATH
 
 
 # Install and configure menu items
