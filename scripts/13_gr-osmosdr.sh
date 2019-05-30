@@ -14,7 +14,8 @@ fi
 mkdir build
 cd build
 cmake ..
-make -j4
+# Initially had -j4 but memory errors made RPi sad
+make -j1
 sudo make install
 cd ~/source
 
