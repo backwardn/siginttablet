@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd ~/source
-# BLEAH
+# bluepy
 echo "Installing BLEAH Bluetooth low energy"
 
 if [ ! -d ~/source/bluepy ]; then
@@ -15,7 +15,8 @@ cd bluepy
 python2 setup.py build
 sudo python2 setup.py install
 
-
+cd ~/source
+# bleah
 if [ ! -d ~/source/bleah ]; then
     git clone https://github.com/jeffehobbs/bleah.git
     cd bleah
