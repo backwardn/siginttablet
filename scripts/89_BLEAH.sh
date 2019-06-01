@@ -11,7 +11,6 @@ else
     cd bluepy
     git pull
 fi
-cd bluepy
 python2 setup.py build
 sudo python2 setup.py install
 
@@ -24,7 +23,6 @@ else
     cd bleah
     git pull
 fi
-cd bleah
 python2 setup.py build
 sudo python2 setup.py install
 
